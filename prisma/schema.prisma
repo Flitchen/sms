@@ -1,0 +1,57 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model course {
+  c_id Int    @id @default(autoincrement())
+  name String @unique @db.VarChar(60)
+  exam exam[]
+}
+
+model exam {
+  e_id    Int     @id @default(autoincrement())
+  c_id    Int
+  s_id    Int
+  marks  String   @db.VarChar(2)
+  course  course  @relation(fields: [c_id], references: [c_id], onDelete: NoAction, map: "c_id")
+  student student @relation(fields: [s_id], references: [s_id], onDelete: NoAction, map: "s_id")
+
+  @@index([c_id], map: "c_id_idx")
+  @@index([s_id], map: "s_id_idx")
+}
+
+model programme {
+  p_id    Int       @id @default(autoincrement())
+  name    String    @unique @db.VarChar(100)
+  student student[]
+}
+
+model student {
+  s_id         Int       @id @default(autoincrement())
+  fname        String    @db.VarChar(250)
+  mname        String?   @db.VarChar(250)
+  lname        String    @db.VarChar(250)
+  gender       String    @db.VarChar(10)
+  year_started Int
+  phone_number String    @unique @db.VarChar(45)
+  p_id         Int
+  password     String    @db.VarChar(250)
+  exam         exam[]
+  programme    programme @relation(fields: [p_id], references: [p_id], onDelete: NoAction, map: "p_id")
+
+  @@index([p_id], map: "p_id_idx")
+}
+
+model admin {
+  id       Int     @id @default(autoincrement())
+  fname    String  @db.VarChar(245)
+  mname    String? @db.VarChar(245)
+  lname    String  @db.VarChar(245)
+  phone    String  @unique @db.VarChar(45)
+  password String  @db.VarChar(250)
+}

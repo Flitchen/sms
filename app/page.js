@@ -34,7 +34,7 @@ export default function Dashboard() {
   }, []);
   return (
     <>
-      <h1 className="text-4xl font-bold mb-6">BAVIK</h1>
+      <h1 className="text-4xl font-bold mb-6">Student Management System</h1>
       {loading ? (
         <Loading />
       ) : (
@@ -42,13 +42,13 @@ export default function Dashboard() {
           <Link href="/admins">
             <div className="bg-white p-4 rounded shadow">
               <h2 className="text-xl font-bold mb-2">Admins</h2>
-              <p className="text-gray-600">{students}</p>
+              <p className="text-gray-600">{admins}</p>
             </div>
           </Link>
           <Link href={"/students"}>
             <div className="bg-white p-4 rounded shadow">
               <h2 className="text-xl font-bold mb-2">Students</h2>
-              <p className="text-gray-600">{admins}</p>
+              <p className="text-gray-600">{students}</p>
             </div>
           </Link>
           <Link href={"/results"}>

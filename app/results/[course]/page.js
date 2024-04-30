@@ -63,7 +63,7 @@ export default function Course({ params }) {
         <div className="flex justify-center items-center h-screen">
           <div className="w-16 h-16 border-t-4 border-b-4 border-blue-500 rounded-full animate-spin"></div>
         </div>
-      ) : students.length > 0 && results.length > 0 ? (
+      ) : students.length > 0 && results.length > 0 && programmes.length > 0 ? (
         <ResultTable
           students={students}
           results={results}
